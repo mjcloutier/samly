@@ -155,8 +155,8 @@ defmodule Samly.SPHandler do
     relay_state = conn.body_params["RelayState"]
 
     with {:ok, payload} <- Helper.decode_idp_signout_req(sp, saml_encoding, saml_request) do
-      # nameid = Esaml.esaml_logoutreq(payload, :name)
-      # issuer = Esaml.esaml_logoutreq(payload, :issuer)
+      nameid = Esaml.esaml_logoutreq(payload, :name)
+      issuer = Esaml.esaml_logoutreq(payload, :issuer)
       Esaml.esaml_logoutreq(name: nameid, issuer: _issuer) = payload
 
       return_status =
